@@ -10,6 +10,7 @@
     <thead>
       <th>Tool Barcode</th>
       <th>Description</th>
+      <th></th>
     </thead>
 
     <tbody>
@@ -17,6 +18,7 @@
         <tr>
           <td><%= tool.tool_barcode %></td>
           <td><%= sanitize(tool.description) %></td>
+          <td><%= button_to 'Add to issuance', line_items_path(tool_id: tool) %></td>
         </tr>
       <% end %>
     </tbody>

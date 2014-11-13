@@ -1,4 +1,12 @@
+<div class="page-header">
+  <h1>New Issuance</h1>
+</div>
+
 <p id="notice"><%= notice %></p>
+
+<% @issuance.line_items.each do |item| %>
+  <li><%= item.tool.tool_barcode %></li>
+<% end %>
 
 <%= link_to 'Edit', edit_issuance_path(@issuance) %> |
 <%= link_to 'Back', issuances_path %>
