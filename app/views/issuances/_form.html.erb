@@ -1,0 +1,17 @@
+<%= form_for(@issuance) do |f| %>
+  <% if @issuance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@issuance.errors.count, "error") %> prohibited this issuance from being saved:</h2>
+
+      <ul>
+      <% @issuance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

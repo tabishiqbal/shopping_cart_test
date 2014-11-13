@@ -1,0 +1,23 @@
+<h1>Listing issuances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @issuances.each do |issuance| %>
+      <tr>
+        <td><%= link_to 'Show', issuance %></td>
+        <td><%= link_to 'Edit', edit_issuance_path(issuance) %></td>
+        <td><%= link_to 'Destroy', issuance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Issuance', new_issuance_path %>

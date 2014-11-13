@@ -1,0 +1,24 @@
+<h1>Tool Invenotry</h1>
+
+<% if notice %>
+  <p><%= notice %></p>
+<% end %>
+
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <th>Tool Barcode</th>
+      <th>Description</th>
+    </thead>
+
+    <tbody>
+      <% @tools.each do |tool| %>
+        <tr>
+          <td><%= tool.tool_barcode %></td>
+          <td><%= sanitize(tool.description) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
