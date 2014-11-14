@@ -12,6 +12,12 @@ class LineItemsController < ApplicationController
   # GET /line_items/1
   # GET /line_items/1.json
   def show
+    @line_item = LineItem.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @line_item }
+    end
   end
 
   # GET /line_items/new
@@ -27,11 +33,12 @@ class LineItemsController < ApplicationController
   # POST /line_items.json
   def create
     tool = Tool.find(params[:tool_id])
-    @line_item = @issuance.line_items.build(tool: tool)
+    @line_item = @issuance.add_tool(tool.id)
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item.issuance, notice: 'Line item was successfully created.' }
+        format.html { redirect_to inventory_url }
+        format.js
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new }
@@ -72,6 +79,6 @@ class LineItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def line_item_params
-      params.require(:line_item).permit(:tool_id, :issuance_id)
+      params.require(:line_item).permit(:tool_id)
     end
 end

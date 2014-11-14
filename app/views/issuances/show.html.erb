@@ -1,12 +1,20 @@
-<div class="page-header">
-  <h1>New Issuance</h1>
-</div>
-
-<p id="notice"><%= notice %></p>
-
-<% @issuance.line_items.each do |item| %>
-  <li><%= item.tool.tool_barcode %></li>
+<% if notice %>
+  <p><%= notice %></p>
 <% end %>
 
-<%= link_to 'Edit', edit_issuance_path(@issuance) %> |
-<%= link_to 'Back', issuances_path %>
+<div class="table-responsive">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Tool Barcode</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<%= render @issuance %>
+		</tbody>
+	</table>
+</div>
+
+<%= button_to 'Discard Issuance', @issuance, method: :delete, data: {confirm: 'Are you sure?'} %>

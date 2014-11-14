@@ -1,5 +1,6 @@
 class IssuancesController < ApplicationController
   before_action :set_issuance, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_issuance
 
   # GET /issuances
   # GET /issuances.json
@@ -54,9 +55,10 @@ class IssuancesController < ApplicationController
   # DELETE /issuances/1
   # DELETE /issuances/1.json
   def destroy
-    @issuance.destroy
+    @issuance.destroy if @issuance.id == session[:issuance_id]
+    session[:issuance_id] = nil
     respond_to do |format|
-      format.html { redirect_to issuances_url, notice: 'Issuance was successfully destroyed.' }
+      format.html { redirect_to issuances_url, notice: 'Issuance was successfully descarded.' }
       format.json { head :no_content }
     end
   end
@@ -70,5 +72,10 @@ class IssuancesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def issuance_params
       params[:issuance]
+    end
+
+    def invalid_issuance
+      logger.error "Attempt to access invalid cart #{params[:id]}"
+      redirect_to store_url, notice: 'Invalid cart'
     end
 end

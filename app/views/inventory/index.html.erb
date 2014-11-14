@@ -1,4 +1,6 @@
-<h1>Tool Invenotry</h1>
+<div class="page-header">
+  <h1>Issue Tool</h1>
+</div>
 
 <% if notice %>
   <p><%= notice %></p>
@@ -18,9 +20,16 @@
         <tr>
           <td><%= tool.tool_barcode %></td>
           <td><%= sanitize(tool.description) %></td>
-          <td><%= button_to 'Add to issuance', line_items_path(tool_id: tool) %></td>
+          <td><%= button_to 'Add to issuance', line_items_path(tool_id: tool), remote: true %></td>
         </tr>
+        <div>
+          <%#= button_to 'Add Tool', line_items_path(tool_id: tool), remote: true %>
+        </div>
       <% end %>
     </tbody>
   </table>
+</div><br><br>
+
+<div id="issuance">
+  <%= render @issuance %>
 </div>
